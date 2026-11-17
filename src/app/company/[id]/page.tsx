@@ -1,6 +1,12 @@
 import { companies }
 from "@/data/companies";
 
+export function generateStaticParams() {
+  return companies.map((company) => ({
+    id: company.id,
+  }));
+}
+
 export default async function CompanyPage({
   params,
 }: {
