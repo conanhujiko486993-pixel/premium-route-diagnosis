@@ -35,23 +35,31 @@ export default function Home() {
         </div>
 
         <h1
-          className="
-          text-5xl
-          font-bold
-          mb-6
-          "
-        >
-          あなたに合う企業を
-          見つけよう
-        </h1>
+  className="
+  text-5xl
+  md:text-7xl
+
+  font-black
+
+  text-slate-900
+
+  leading-tight
+  "
+>
+  あなたに合う企業を
+  見つけよう
+</h1>
 
         <p
-          className="
-          text-xl
-          text-gray-600
-          mb-10
-          "
-        >
+  className="
+  mt-6
+
+  text-xl
+
+  text-slate-600
+  "
+>
+
           16タイプ診断と
           20社マッチングで
           最適な企業をレコメンド

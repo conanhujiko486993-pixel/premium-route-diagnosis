@@ -25,13 +25,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body
   className="
-  min-h-screen
-  bg-gradient-to-br
-  from-blue-50
-  via-white
-  to-indigo-100
+    antialiased
+
+    selection:bg-indigo-500
+    selection:text-white
   "
 >
+  
   {children}
 </body>
 

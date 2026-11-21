@@ -17,53 +17,82 @@ export default function QuestionCard({
   return (
     <div
   className="
-  bg-white
+  bg-white/80
+
+  backdrop-blur
+
   rounded-3xl
+
   p-8
-  shadow-lg
+
+  shadow-xl
+
   border
-  border-slate-100
+  border-white
   "
 >
 
-        <h2
+  <h2
+    className="
+    text-3xl
+
+    font-bold
+
+    text-slate-900
+
+    mb-8
+
+    leading-relaxed
+    "
+  >
+    {question}
+  </h2>
+
+  <div className="space-y-3">
+
+    {options.map((option) => (
+
+      <button
+        key={option.id}
+        onClick={() =>
+          onSelect(option.id)
+        }
+
         className="
-        text-2xl
-        font-bold
-        mb-8
+        w-full
+
+        p-5
+
+        text-left
+
+        text-slate-800
+        font-medium
+
+        rounded-2xl
+
+        border-2
+        border-slate-200
+
+        bg-white
+
+        hover:border-blue-500
+        hover:bg-blue-50
+        hover:text-blue-700
+
+        transition-all
+        duration-200
         "
       >
-        {question}
-      </h2>
 
-      <div className="space-y-3">
-        {options.map((option) => (
-          <button
-            key={option.id}
-            onClick={() =>
-              onSelect(option.id)
-            }
-           className="
-w-full
-p-5
-text-left
+        {option.label}
 
-rounded-2xl
+      </button>
 
-border-2
-border-slate-200
+    ))}
 
-hover:border-blue-500
-hover:bg-blue-50
+  </div>
 
-transition
-duration-200
-"
-         >
-            {option.label}
-          </button>
-        ))}
-      </div>
-    </div>
+</div>
+
   );
 }

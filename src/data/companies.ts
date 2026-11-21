@@ -1,5 +1,8 @@
-export const companies = [
+import { Company }
+from "@/types/company";
 
+export const companies: Company[] = [
+  
   {
     id: "sompo",
     name: "損保ジャパン",
@@ -11,8 +14,30 @@ export const companies = [
       "安定基盤",
       "大規模事業"
     ],
-    entryUrl: "https://example.com/sompo"
-  },
+   
+  profile: {
+
+   salary: 4,
+
+   growth: 3,
+
+   global: 2,
+
+   welfare: 5,
+
+   social: 5,
+
+   specialty: 3,
+
+   entrepreneurship: 1,
+
+   management: 3,
+
+   workLifeBalance: 4
+
+  }
+
+},
 
   {
     id: "orix",
@@ -25,7 +50,28 @@ export const companies = [
       "事業投資",
       "挑戦"
     ],
-    entryUrl: "https://example.com/orix"
+    profile: {
+
+  salary: 5,
+
+  growth: 4,
+
+  global: 3,
+
+  welfare: 4,
+
+  social: 2,
+
+  specialty: 3,
+
+  entrepreneurship: 4,
+
+  management: 5,
+
+  workLifeBalance: 3
+
+}
+
   },
 
   {
@@ -39,7 +85,18 @@ export const companies = [
       "商社",
       "事業開発"
     ],
-    entryUrl: "https://example.com/sumitomo"
+    profile: {
+  salary: 4,
+  growth: 4,
+  global: 5,
+  welfare: 4,
+  social: 2,
+  specialty: 3,
+  entrepreneurship: 3,
+  management: 4,
+  workLifeBalance: 3
+}
+
   },
 
   {
@@ -53,7 +110,18 @@ export const companies = [
       "まちづくり",
       "安定"
     ],
-    entryUrl: "https://example.com/daiwahouse"
+    profile: {
+  salary: 4,
+  growth: 3,
+  global: 2,
+  welfare: 4,
+  social: 4,
+  specialty: 3,
+  entrepreneurship: 2,
+  management: 3,
+  workLifeBalance: 4
+}
+
   },
 
   {
@@ -67,7 +135,28 @@ export const companies = [
       "新規事業",
       "裁量権"
     ],
-    entryUrl: "https://example.com/leverages"
+    profile: {
+
+  salary: 4,
+
+  growth: 5,
+
+  global: 2,
+
+  welfare: 3,
+
+  social: 2,
+
+  specialty: 3,
+
+  entrepreneurship: 5,
+
+  management: 4,
+
+  workLifeBalance: 2
+
+}
+
   },
 
   {
@@ -81,7 +170,18 @@ export const companies = [
       "技術力",
       "挑戦"
     ],
-    entryUrl: "https://example.com/scoville"
+    profile: {
+  salary: 4,
+  growth: 5,
+  global: 3,
+  welfare: 2,
+  social: 1,
+  specialty: 5,
+  entrepreneurship: 5,
+  management: 3,
+  workLifeBalance: 2
+}
+
   },
 
   {
@@ -95,7 +195,18 @@ export const companies = [
       "成長",
       "挑戦"
     ],
-    entryUrl: "https://example.com/oha"
+    profile: {
+  salary: 4,
+  growth: 4,
+  global: 1,
+  welfare: 3,
+  social: 2,
+  specialty: 3,
+  entrepreneurship: 4,
+  management: 3,
+  workLifeBalance: 2
+}
+
   },
 
   {
@@ -109,7 +220,18 @@ export const companies = [
       "課題解決",
       "経営"
     ],
-    entryUrl: "https://example.com/layers"
+    profile: {
+  salary: 4,
+  growth: 4,
+  global: 2,
+  welfare: 4,
+  social: 2,
+  specialty: 5,
+  entrepreneurship: 2,
+  management: 4,
+  workLifeBalance: 3
+}
+
   },
 
   {
@@ -123,7 +245,28 @@ export const companies = [
       "営業",
       "挑戦"
     ],
-    entryUrl: "https://example.com/dym"
+    profile: {
+
+  salary: 5,
+
+  growth: 5,
+
+  global: 2,
+
+  welfare: 2,
+
+  social: 1,
+
+  specialty: 2,
+
+  entrepreneurship: 5,
+
+  management: 4,
+
+  workLifeBalance: 2
+
+}
+
   },
 
   {
@@ -137,7 +280,18 @@ export const companies = [
       "人事",
       "専門性"
     ],
-    entryUrl: "https://example.com/whi"
+    profile: {
+  salary: 4,
+  growth: 4,
+  global: 2,
+  welfare: 5,
+  social: 2,
+  specialty: 5,
+  entrepreneurship: 1,
+  management: 2,
+  workLifeBalance: 4
+}
+
   },
 
   {
@@ -151,7 +305,18 @@ export const companies = [
       "経営",
       "成長"
     ],
-    entryUrl: "https://example.com/fullsapo"
+    profile: {
+  salary: 3,
+  growth: 4,
+  global: 1,
+  welfare: 3,
+  social: 3,
+  specialty: 3,
+  entrepreneurship: 3,
+  management: 3,
+  workLifeBalance: 3
+}
+
   },
 
   {
@@ -165,7 +330,18 @@ export const companies = [
       "社会貢献",
       "支援"
     ],
-    entryUrl: "https://example.com/try"
+    profile: {
+  salary: 3,
+  growth: 3,
+  global: 1,
+  welfare: 4,
+  social: 5,
+  specialty: 3,
+  entrepreneurship: 1,
+  management: 3,
+  workLifeBalance: 4
+}
+
   },
 
   {
@@ -179,7 +355,18 @@ export const companies = [
       "店舗運営",
       "安定"
     ],
-    entryUrl: "https://example.com/kusuri"
+    profile: {
+  salary: 3,
+  growth: 3,
+  global: 1,
+  welfare: 4,
+  social: 4,
+  specialty: 2,
+  entrepreneurship: 1,
+  management: 3,
+  workLifeBalance: 4
+}
+
   },
 
   {
@@ -193,7 +380,18 @@ export const companies = [
       "分析",
       "課題解決"
     ],
-    entryUrl: "https://example.com/grant"
+    profile: {
+  salary: 4,
+  growth: 4,
+  global: 2,
+  welfare: 5,
+  social: 2,
+  specialty: 5,
+  entrepreneurship: 2,
+  management: 3,
+  workLifeBalance: 5
+}
+
   },
 
   {
@@ -207,7 +405,18 @@ export const companies = [
       "DX",
       "データ"
     ],
-    entryUrl: "https://example.com/datax"
+    profile: {
+  salary: 4,
+  growth: 5,
+  global: 2,
+  welfare: 2,
+  social: 1,
+  specialty: 4,
+  entrepreneurship: 5,
+  management: 3,
+  workLifeBalance: 2
+}
+
   },
 
   {
@@ -221,7 +430,18 @@ export const companies = [
       "IT",
       "大規模案件"
     ],
-    entryUrl: "https://example.com/tcs"
+    profile: {
+  salary: 4,
+  growth: 3,
+  global: 5,
+  welfare: 4,
+  social: 2,
+  specialty: 5,
+  entrepreneurship: 1,
+  management: 3,
+  workLifeBalance: 4
+}
+
   },
 
   {
@@ -235,7 +455,18 @@ export const companies = [
       "医療",
       "成長"
     ],
-    entryUrl: "https://example.com/sms"
+    profile: {
+  salary: 3,
+  growth: 4,
+  global: 2,
+  welfare: 4,
+  social: 5,
+  specialty: 3,
+  entrepreneurship: 2,
+  management: 3,
+  workLifeBalance: 3
+}
+
   },
 
   {
@@ -249,7 +480,18 @@ export const companies = [
       "地域貢献",
       "成長"
     ],
-    entryUrl: "https://example.com/architex"
+    profile: {
+  salary: 3,
+  growth: 4,
+  global: 1,
+  welfare: 3,
+  social: 3,
+  specialty: 3,
+  entrepreneurship: 3,
+  management: 3,
+  workLifeBalance: 3
+}
+
   },
 
   {
@@ -263,7 +505,18 @@ export const companies = [
       "小売",
       "成長"
     ],
-    entryUrl: "https://example.com/second"
+    profile: {
+  salary: 3,
+  growth: 4,
+  global: 1,
+  welfare: 3,
+  social: 4,
+  specialty: 2,
+  entrepreneurship: 3,
+  management: 3,
+  workLifeBalance: 3
+}
+
   },
 
   {
@@ -277,8 +530,30 @@ export const companies = [
       "DX",
       "テクノロジー"
     ],
-    entryUrl: "https://example.com/m3"
-  }
+    profile: {
+
+  salary: 5,
+
+  growth: 5,
+
+  global: 3,
+
+  welfare: 4,
+
+  social: 4,
+
+  specialty: 5,
+
+  entrepreneurship: 4,
+
+  management: 4,
+
+  workLifeBalance: 3
+
+},
+
+}
 
 ];
+
 

@@ -2,9 +2,15 @@ import { companies }
 from "@/data/companies";
 
 export function generateStaticParams() {
-  return companies.map((company) => ({
-    id: company.id,
-  }));
+
+  return companies.map(
+    (company) => ({
+
+      id: company.id,
+
+    })
+  );
+
 }
 
 export default async function CompanyPage({
@@ -141,25 +147,7 @@ export default async function CompanyPage({
 
         </div>
 
-        <a
-          href={
-            company.entryUrl
-          }
-          target="_blank"
-          className="
-          inline-block
-          mt-12
-          px-6
-          py-4
-          bg-blue-600
-          text-white
-          rounded-xl
-          font-bold
-          "
-        >
-          企業サイトを見る
-        </a>
-
+    
       </div>
 
     </main>

@@ -1,29 +1,28 @@
 "use client";
 
-import {
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 
 import TypeCard from "@/components/TypeCard";
 import CompanyCard from "@/components/CompanyCard";
 
-import { types }
-from "@/data/types";
+import { types } from "@/data/types";
+import { companies } from "@/data/companies";
+import { companyQuestions } from "@/data/companyQuestions";
 
-import { companies }
-from "@/data/companies";
-
-import {
-  calculateCompanyScore,
-  rankCompanies,
-}
-from "@/lib/matching";
+import { CompanyMatch } from "@/types/company";
+import { Profile } from "@/types/profile";
 
 import {
-  companyQuestions,
-}
-from "@/data/companyQuestions";
+  createUserProfile,
+  rankCompaniesByProfile,
+  convertToMatchRate,
+  generateReason,
+  generateReasonText,
+} from "@/lib/profileMatching";
+
+import ProfileRadarChart
+from "@/components/ProfileRadarChart";
+
 
 export default function ResultPage() {
 
@@ -31,9 +30,24 @@ export default function ResultPage() {
     useState("");
 
   const [
+    userProfile,
+    setUserProfile,
+  ] =
+    useState<Profile | null>(
+      null
+    );
+
+    const medals =
+
+["🥇","🥈","🥉","🏅","🏅"];
+
+  const [
     topCompanies,
     setTopCompanies,
-  ] = useState<any[]>([]);
+  ] =
+    useState<
+      CompanyMatch[]
+    >([]);
 
   useEffect(() => {
 
@@ -51,35 +65,39 @@ export default function ResultPage() {
         "companyAnswers"
       );
 
-    if (storedAnswers) {
+    if (!storedAnswers) {
+      return;
+    }
 
-      const answers =
-        JSON.parse(
-          storedAnswers
-        );
+    const answers =
+      JSON.parse(
+        storedAnswers
+      );
 
-      const scores =
-        calculateCompanyScore(
-          answers,
-          companyQuestions
-        );
+    const calculatedProfile =
+      createUserProfile(
+        answers,
+        companyQuestions
+      );
 
-      const ranking =
-        rankCompanies(
-          scores
-        );
+    setUserProfile(
+      calculatedProfile
+    );
 
-      console.log("answers", answers);
-console.log("scores", scores);
-console.log("ranking", ranking);
+    const ranking =
+      rankCompaniesByProfile(
+        calculatedProfile,
+        companies
+      );
 
-      setTopCompanies(
+    const result =
+      convertToMatchRate(
         ranking
       );
 
-      console.log("ranking", ranking);
-
-    }
+    setTopCompanies(
+      result
+    );
 
   }, []);
 
@@ -102,99 +120,355 @@ console.log("ranking", ranking);
 
   return (
 
-    <main
-      className="
-      max-w-5xl
-      mx-auto
-      p-8
-      "
-    >
+  <main
+    className="
+    max-w-6xl
+    mx-auto
 
-      <TypeCard
-        code={type}
-        name={info.name}
-        description={
-          info.description
-        }
-        strengths={
-          info.strengths
-        }
+    px-4
+    md:px-8
+
+    py-8
+    "
+  >
+
+    <TypeCard
+      code={type}
+      name={info.name}
+      description={info.description}
+      strengths={info.strengths}
+    />
+
+    {userProfile && (
+
+      <ProfileRadarChart
+        profile={userProfile}
       />
 
-      <div className="mt-12">
+    )}
 
-        <h2
+    {topCompanies.length > 0 && (
+
+      <section
+        className="
+        mt-12
+
+        relative
+
+        overflow-hidden
+
+        rounded-3xl
+
+        bg-gradient-to-br
+
+        from-amber-400
+        via-orange-500
+        to-pink-500
+
+        text-white
+
+        shadow-2xl
+
+        p-6
+        md:p-10
+        "
+      >
+
+        <div
           className="
-          text-2xl
-          font-bold
-          mb-6
-          "
-        >
-          おすすめ企業 TOP5
-        </h2>
+          absolute
 
-        {topCompanies.length === 0 && (
+          -top-20
+          -right-20
+
+          w-72
+          h-72
+
+          rounded-full
+
+          bg-white/10
+
+          blur-3xl
+          "
+        />
+
+        <div className="relative z-10">
 
           <div
             className="
-            border
-            rounded-xl
-            p-4
+            text-xs
+            md:text-sm
+
+            uppercase
+
+            tracking-[0.2em]
+
+            text-amber-100
             "
           >
-            まだ企業ランキングがありません
+            BEST MATCH
           </div>
 
-        )}
+          <h2
+            className="
+            mt-3
 
-<div>
-  TOP件数:
-  {topCompanies.length}
-</div>
+            text-3xl
+            md:text-5xl
 
-        {topCompanies.map(
-          (companyResult) => {
+            font-black
+            "
+          >
+            🥇 あなたに最適な企業
+          </h2>
 
-            const company =
-              companies.find(
-                (c) =>
-                  c.id ===
-                  companyResult.id
-              );
+          <div className="mt-8">
 
-            if (!company) {
-              return null;
-            }
+            <div
+              className="
+              text-4xl
+              md:text-6xl
 
-            const matchRate =
-              topCompanies.length > 0
-                ? Math.round(
-                    (
-                      companyResult.score /
-                      topCompanies[0].score
-                    ) * 100
-                  )
-                : 0;
+              font-black
 
-            return (
+              leading-tight
+              "
+            >
+              {topCompanies[0].company.name}
+            </div>
+
+            <div
+              className="
+              mt-3
+
+              text-base
+              md:text-xl
+
+              text-amber-50
+
+              leading-relaxed
+              "
+            >
+              {topCompanies[0].company.catchCopy}
+            </div>
+
+          </div>
+
+          <div className="mt-8">
+
+            <div
+              className="
+              text-sm
+
+              text-amber-100
+              "
+            >
+              マッチ率
+            </div>
+
+            <div
+              className="
+              text-6xl
+              md:text-8xl
+
+              font-black
+              "
+            >
+              {topCompanies[0].matchRate}%
+            </div>
+
+          </div>
+
+          <div
+            className="
+            mt-8
+
+            flex
+            flex-wrap
+
+            gap-3
+            "
+          >
+
+generateReasonText(
+  userProfile,
+  topCompanies[0].company.profile,
+  topCompanies[0].company.name
+)
+
+            {userProfile &&
+
+              generateReason(
+                userProfile,
+                topCompanies[0].company.profile
+              ).map((reason) => (
+
+                <span
+                  key={reason}
+                  className="
+                  px-4
+                  py-2
+
+                  rounded-full
+
+                  bg-white/20
+
+                  backdrop-blur
+
+                  font-semibold
+
+                  text-sm
+                  md:text-base
+                  "
+                >
+                  ✅ {reason}
+                </span>
+
+              ))}
+
+          </div>
+
+          {userProfile && (
+
+            <div
+              className="
+              mt-8
+
+              rounded-2xl
+
+              bg-white/15
+
+              backdrop-blur
+
+              p-5
+              "
+            >
+
+              <div
+                className="
+                text-sm
+
+                uppercase
+
+                tracking-widest
+
+                text-amber-100
+
+                mb-3
+                "
+              >
+                AI診断コメント
+              </div>
+
+              <p
+                className="
+                text-base
+                md:text-lg
+
+                text-white
+
+                leading-relaxed
+                "
+              >
+                あなたは
+                「
+                {generateReason(
+                  userProfile,
+                  topCompanies[0].company.profile
+                ).join("・")}
+                」
+                を重視する傾向があります。
+
+                {topCompanies[0].company.name}
+                はその価値観との一致度が高く、
+                特に活躍できる可能性が高い企業です。
+              </p>
+
+            </div>
+
+          )}
+
+        </div>
+
+      </section>
+
+    )}
+
+    <section className="mt-12">
+
+      <h2
+        className="
+        text-3xl
+        md:text-4xl
+
+        font-black
+
+        text-slate-900
+
+        mb-8
+        "
+      >
+        🏢 その他おすすめ企業
+      </h2>
+
+      {topCompanies
+        .slice(1)
+        .map(
+          (
+            companyResult,
+            index
+          ) => (
+
+            <div
+              key={
+                companyResult.company.id
+              }
+            >
+
+              <div
+                className="
+                mb-2
+
+                text-lg
+
+                font-bold
+
+                text-slate-700
+                "
+              >
+                {
+                  medals[
+                    index + 1
+                  ]
+                }
+              </div>
 
               <CompanyCard
-                key={company.id}
-                company={company}
+                company={
+                  companyResult.company
+                }
                 matchRate={
-                  matchRate
+                  companyResult.matchRate
+                }
+                reason={
+                  userProfile
+                    ? generateReason(
+                        userProfile,
+                        companyResult.company.profile
+                      )
+                    : []
                 }
               />
 
-            );
+            </div>
 
-          }
+          )
         )}
 
-      </div>
+    </section>
 
-    </main>
+  </main>
 
-  );
+);
 
 }
